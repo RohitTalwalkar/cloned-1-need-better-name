@@ -44,8 +44,7 @@ export default function Home() {
   return (
     <main style={{ margin: "24px" }}>
       <h1>Solace Advocates</h1>
-      <br />
-      <br />
+      <div style={{ height: "60px" }}></div>
       <div>
         <p>Search</p>
         <p>
@@ -54,24 +53,21 @@ export default function Home() {
         <input style={{ border: "1px solid black" }} onChange={onChange} />
         <button onClick={onClick}>Reset Search</button>
       </div>
-      <br />
-      <br />
-      <table>
+      <div style={{ height: "60px" }}></div>
+      <table style={{ borderSpacing: "4px", borderCollapse: "separate" }}>
         <thead>
-          <th>First Name</th>
-          <th>Last Name</th>
+          <th>Name</th>
           <th>City</th>
           <th>Degree</th>
           <th>Specialties</th>
-          <th>Years of Experience</th>
-          <th>Phone Number</th>
+          <th>Experience (years)</th>
+          <th>Phone</th>
         </thead>
         <tbody>
           {filteredAdvocates.map((advocate) => {
             return (
-              <tr>
-                <td>{advocate.firstName}</td>
-                <td>{advocate.lastName}</td>
+              <tr class="even:bg-gray-100 odd:bg-blue-100">
+                <td>{`${advocate.firstName} ${advocate.lastName}`}</td>
                 <td>{advocate.city}</td>
                 <td>{advocate.degree}</td>
                 <td>
