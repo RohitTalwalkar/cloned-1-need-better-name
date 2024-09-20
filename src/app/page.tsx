@@ -1,20 +1,26 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
+const fetchAdvocates = async () => {
+  const response = await fetch("/api/advocates");
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return response.json();
+};
+
 export default function Home() {
-  const [advocates, setAdvocates] = useState([]);
   const [filteredAdvocates, setFilteredAdvocates] = useState([]);
 
-  useEffect(() => {
-    console.log("fetching advocates...");
-    fetch("/api/advocates").then((response) => {
-      response.json().then((jsonResponse) => {
-        setAdvocates(jsonResponse.data);
-        setFilteredAdvocates(jsonResponse.data);
-      });
-    });
-  }, []);
+  const { data: advocates, isLoading } = useQuery({
+    queryFn: fetchAdvocates,
+  });
+
+  if (isLoading) {
+    return <>Loading...</>;
+  }
 
   const onChange = (e) => {
     const searchTerm = e.target.value;
